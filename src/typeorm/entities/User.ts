@@ -1,24 +1,28 @@
 import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
-@Entity({name:"users"})
+@Entity({ name: 'users' })
+export class User {
+    @PrimaryGeneratedColumn({ type: 'bigint' })
+    id: number;
 
-export class User{
+    @Column({ unique: true })
+    username: string;
 
-    @PrimaryGeneratedColumn()
-    id:number
+    @Column()
+    password: string;
 
-    @Column({unique:true})
-    username:string
+    @Column({ unique: true })
+    email: string;
+    @Column()
+    createdAt: Date;
 
-    @Column({unique:true})
-    email:string
+    @Column({ nullable: true })
+    authStrategy: string;
 
-    @Column({default:new Date()})
-    createdAt:Date
+    //   @OneToOne(() => Profile)
+    //   @JoinColumn()
+    //   profile: Profile;
 
-    @Column({nullable:true})
-    authStrategy:string
-
-
-
+    //   @OneToMany(() => Post, (post) => post.user)
+    //   posts: Post[];
 }
